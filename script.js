@@ -48,7 +48,7 @@ document.querySelectorAll("[data-intent]").forEach((a) =>
   a.addEventListener("click", () => setType(a.dataset.intent === "brand" ? "Brand" : "Creator"))
 );
 
-// Contact form submit — delivered to CONTACT_EMAIL by FormSubmit (formsubmit.co).
+// Contact form submit, delivered to CONTACT_EMAIL by FormSubmit (formsubmit.co).
 // The very first submission triggers a one-time activation email to that inbox.
 const FORM_ENDPOINT = `https://formsubmit.co/ajax/${CONTACT_EMAIL}`;
 const note = document.getElementById("formNote");
@@ -59,7 +59,7 @@ form.addEventListener("submit", async (e) => {
   const data = new FormData(form);
   if (data.get("_honey")) return; // bot filled the hidden field
   const type = data.get("type");
-  const subject = `${type} inquiry — ${data.get("name")}`;
+  const subject = `${type} inquiry from ${data.get("name")}`;
   const detailLabel = type === "Brand" ? "Company / website" : "Social handle";
 
   submitBtn.disabled = true;
@@ -79,7 +79,7 @@ form.addEventListener("submit", async (e) => {
         "Inquiry type": type,
         Name: data.get("name"),
         Email: data.get("email"),
-        [detailLabel]: data.get("handle") || "—",
+        [detailLabel]: data.get("handle") || "Not provided",
         Message: data.get("message"),
       }),
     });
@@ -89,10 +89,10 @@ form.addEventListener("submit", async (e) => {
     form.reset();
     setType("Creator");
     form.classList.add("is-sent");
-    note.textContent = "Thank you — your inquiry is in. Our team will be in touch within two business days.";
+    note.textContent = "Thank you, your inquiry is in. Our team will be in touch within two business days.";
   } catch (err) {
     // Fallback: let the visitor send it from their own mail app
-    const body = [`Name: ${data.get("name")}`, `Email: ${data.get("email")}`, `${detailLabel}: ${data.get("handle") || "—"}`, "", data.get("message")].join("\n");
+    const body = [`Name: ${data.get("name")}`, `Email: ${data.get("email")}`, `${detailLabel}: ${data.get("handle") || "Not provided"}`, "", data.get("message")].join("\n");
     const mailto = `mailto:${CONTACT_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     note.classList.add("is-error");
     note.innerHTML = `Something went wrong sending your message. <a href="${mailto}">Email us directly</a> instead.`;
