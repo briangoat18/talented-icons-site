@@ -387,6 +387,9 @@ em { font-style: italic; color: var(--accent-hi); }
 .footer-links a { font-size: 14px; color: var(--muted); transition: color 0.3s; }
 .footer-links a:hover { color: var(--accent); }
 .copyright { font-size: 13px; color: var(--muted); }
+.footer-brand { display: flex; flex-direction: column; gap: 10px; }
+.footer-tagline { font-family: var(--serif); font-style: italic; font-size: 18px; color: var(--muted); }
+.footer-tagline em { color: var(--accent-hi); }
 
 /* ---------- Reveal ---------- */
 .reveal { opacity: 0; transform: translateY(28px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
@@ -431,6 +434,7 @@ em { font-style: italic; color: var(--accent-hi); }
   .contact-form { padding: 28px 20px; }
   .statement { padding: 110px 0; }
   .footer-inner { flex-direction: column; text-align: center; }
+  .footer-brand { align-items: center; }
 }
 
 /* ---------- Hero stats ---------- */
